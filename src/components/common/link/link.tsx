@@ -1,3 +1,3 @@
-import { Link } from 'next-view-transitions'
+import Link from 'next/link'
 
-export {Link};
+export { Link }

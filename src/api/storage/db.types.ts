@@ -1,35 +1,25 @@
-// TAGS
+import { IBase } from "@/app/types"
 
+// TAGS
 export interface ITag {
 	index: string
 	color: string
 }
 
 // TASKS
-export interface ITask {
+export interface ITask extends IBase {
+	id?: string
 	title: string
 	htmlContent: string
 	fields: TWorkflowField[]
 	tags?: ITag[]
-	createdAt: Date
-	modifiedAt: Date
 }
 
 // FIELDS
-export type TFieldTypes =
-	| 'state'
-	| 'list'
-	| 'multi-list'
-	| 'date'
-	| 'period'
-	| 'string'
+export type TFieldTypes = "state" | "list" | "multi-list" | "date" | "period" | "string"
 
 export interface IFieldPeriod {
-	months: number
-	weekends: number
-	days: number
-	hours: number
-	minutes: number
+	spent: string
 }
 
 export interface IFieldState {
