@@ -6,11 +6,11 @@ export const navHeader: TNav[] = [
 		pathname: "/",
 		type: "equal",
 	},
-	{
+	/* {
 		title: "Kanban board",
 		pathname: "/kanban-board",
 		type: "include",
-	},
+	}, */
 	{
 		title: "Notice",
 		pathname: "/notice",

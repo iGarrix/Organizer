@@ -1,7 +1,6 @@
 import { MobxStorageProtector } from "@/api/storage/db.protector"
 import { MobxStorageProvider } from "@/api/storage/db.provider"
 import type { Metadata } from "next"
-import { ViewTransitions } from "next-view-transitions"
 import { Inter, Pacifico, Fira_Code, Source_Code_Pro } from "next/font/google"
 
 import { Toaster } from "@/components/ui/sonner"
@@ -42,7 +41,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<body
 				className={`${rootFont.className} ${rootFont.variable} ${borel.variable} ${sourceCodeFont.variable} ${firacodeFont.variable} antialiased`}
 			>
@@ -50,7 +49,6 @@ export default function RootLayout({
 					<MobxStorageProvider>
 						<MobxStorageProtector>{children}</MobxStorageProtector>
 					</MobxStorageProvider>
-					<Toaster />
 				</NextThemeProvider>
 			</body>
 		</html>

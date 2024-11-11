@@ -69,7 +69,10 @@ class Storage {
 		if (typeof window !== "undefined") {
 			const tasksJson = localStorage.getItem(LocalStorageContants.Tasks)
 			if (tasksJson) {
-				task.id = `${this.workflow?.id.toUpperCase()}-${this.tasks.length + 1}`
+				const lastTaskId = this.tasks[this.tasks.length - 1].id?.split("-")[1]
+				task.id = `${this.workflow?.id.toUpperCase()}-${
+					Number(lastTaskId) + 1 || this.tasks.length + 1
+				}`
 				const tasks = JSON.parse(tasksJson) as ITask[]
 				const updated = [...tasks, task]
 				localStorage.setItem(LocalStorageContants.Tasks, JSON.stringify(updated))

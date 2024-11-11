@@ -1,20 +1,15 @@
 "use client"
 
 import { articleService } from "@/api/articles/articles.instance"
-import { useStorage } from "@/api/storage/db.provider"
 import { Link } from "@/components/common/link/link"
-import Tag from "@/components/common/tag/tag.component"
 import { format } from "date-fns"
 import { observer } from "mobx-react-lite"
 import { FaPlus } from "react-icons/fa"
-import { toast } from "sonner"
 
 function NavbarNotice() {
-	const { workflow } = useStorage()
 	const { articles } = articleService
-	console.log(articles)
 	return (
-		<div className="w-full max-h-[80svh] sticky top-[5rem]">
+		<div className="w-full sticky top-[5rem]">
 			<div className="w-full bg-gray-200/60 border rounded overflow-hidden dark:bg-dark-100 dark:border-light/20">
 				<div className="flex items-center justify-between py-2">
 					<h1 className="text-lg font-semibold uppercase px-4">Notices</h1>
@@ -26,7 +21,7 @@ function NavbarNotice() {
 					</Link>
 				</div>
 				<hr className="border-black/10 dark:border-light/20" />
-				<ul className="flex flex-col">
+				<ul className="flex flex-col max-h-[60svh] overflow-auto">
 					{articles.length === 0 && (
 						<div className="flex justify-center items-center text-gray-500 py-4">Notices empty</div>
 					)}

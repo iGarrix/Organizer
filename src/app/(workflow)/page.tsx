@@ -55,12 +55,9 @@ function Home(props: { searchParams: { [key: string]: string | null } }) {
 	const wSelectAll = watch("selectAll")
 
 	const onSubmit = (values: FilterValues) => {
-		console.log("on submit")
-		/* if (values.findValue && values.findValue.length > 0) {
-		} */
 		const jsTasks = toJS(tasks)
 		const paginateModel = generatePaginationByParams(
-			jsTasks.filter(f => f.title.includes(values.findValue)),
+			jsTasks.filter(f => f.title.toLowerCase().includes(values.findValue.toLowerCase())),
 			props.searchParams
 		)
 		if (paginateModel) {
@@ -70,11 +67,16 @@ function Home(props: { searchParams: { [key: string]: string | null } }) {
 	}
 
 	const onDeleteAllTasks = (value: FilterValues) => {
-		console.log(value.selectedTaskIds)
 		if (value.selectedTaskIds.length > 0) {
-			/* value.selectedTaskIds.forEach(f => {
+			let _tasks = toJS(tasks)
+			value.selectedTaskIds.forEach(f => {
 				deleteTask(f)
-			}) */
+				_tasks = _tasks.filter(s => s.id !== f)
+			})
+			const paginateModel = generatePaginationByParams(_tasks, props.searchParams)
+			if (paginateModel) {
+				setPaginatedTasks(paginateModel)
+			}
 			notify({
 				title: "Task removing",
 				content: "All selected task was deleted",
@@ -82,6 +84,8 @@ function Home(props: { searchParams: { [key: string]: string | null } }) {
 				createdAt: new Date(),
 			})
 			toast.warning("Selected task was deleted")
+			setValue("selectAll", false)
+			setValue("selectedTaskIds", [])
 			return
 		}
 		toast.info("Select tasks in order to delete")
@@ -100,7 +104,7 @@ function Home(props: { searchParams: { [key: string]: string | null } }) {
 		const jsTasks = toJS(tasks)
 		if (findValue) {
 			const paginateModel = generatePaginationByParams(
-				jsTasks.filter(f => f.title.includes(findValue)),
+				jsTasks.filter(f => f.title.toLowerCase().includes(findValue.toLowerCase())),
 				props.searchParams
 			)
 			if (paginateModel) {
@@ -124,8 +128,8 @@ function Home(props: { searchParams: { [key: string]: string | null } }) {
 		)
 	}
 	return (
-		<div className="h-full min-h-screen flex flex-col gap-4 pb-6">
-			<div className="flex flex-col gap-2">
+		<div className="h-full min-h-screen flex flex-col gap-4 pb-6 overflow-x-hidden">
+			<div className="flex flex-col gap-2 xs:px-2 md:px-0">
 				<div className="w-full">
 					<form
 						onSubmit={handleSubmit(onSubmit)}
@@ -162,6 +166,7 @@ function Home(props: { searchParams: { [key: string]: string | null } }) {
 				<form onSubmit={handleSubmit(onDeleteAllTasks)} className="pt-2 flex items-center gap-4">
 					<input
 						type="checkbox"
+						checked={wSelectAll}
 						placeholder="Enter search request"
 						className="w-4 h-4"
 						onChange={e => {
@@ -221,8 +226,7 @@ function Home(props: { searchParams: { [key: string]: string | null } }) {
 					</div>
 				</form>
 			</div>
-
-			<div className="grid">
+			<div className="">
 				{paginatedTasks.list
 					.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 					.map((f, i) => (

@@ -8,16 +8,16 @@ import DefButton from "@/components/common/buttons/defbutton/defbutton.component
 import GhostButton from "@/components/common/buttons/ghostbutton/ghostbutton.component"
 import RichTextEditor from "@/components/common/fields/richtexteditor"
 import Tag from "@/components/common/tag/tag.component"
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { NewArticleSchema, NewArticleValues } from "@/forms/create-article-validation/types"
 import { cn } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
-import {
-	DropdownMenu,
-	DropdownMenuTrigger,
-	DropdownMenuContent,
-	DropdownMenuItem,
-} from "@radix-ui/react-dropdown-menu"
 import { formatDistance } from "date-fns"
 import { AnimatePresence, motion } from "framer-motion"
 import { toJS, values } from "mobx"
@@ -273,9 +273,9 @@ export default function ArticlePage(props: { params: { article: string } }) {
 										<DropdownMenuTrigger type="button">
 											<SlOptions className="w-4 h-4 text-neutral-500 transition-all hover:text-blue-500" />
 										</DropdownMenuTrigger>
-										<DropdownMenuContent className="bg-light rounded p-0 py-2 select-none min-w-[15rem]">
+										<DropdownMenuContent className="bg-light rounded p-0 py-2 select-none min-w-[15rem] dark:bg-dark-100 dark:border-light/20 z-10">
 											<DropdownMenuItem
-												className="text-rose-500 hover:!text-rose-600"
+												className="text-rose-500 hover:!text-rose-600 dark:hover:bg-light/5"
 												onClick={() => {
 													handleDeleteTask()
 												}}

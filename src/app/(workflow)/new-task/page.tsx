@@ -132,10 +132,10 @@ function NewTaskPage() {
 		}
 	}, [taskField, workflow?.globalFields])
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-			<div className="grid grid-cols-[1fr_22rem] gap-x-4">
+		<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col xs:px-2 lg:px-0">
+			<div className="grid grid-cols-[1fr_22rem] gap-x-4 xs:grid-cols-1 lg:grid-cols-[1fr_22rem]">
 				<div className="flex flex-col relative">
-					<div className="sticky top-[4rem] bg-light dark:bg-dark-200 pb-2 z-50">
+					<div className="sticky top-[4rem] xs:top-0 lg:top-[4rem] bg-light dark:bg-dark-200 pb-2 z-50">
 						<br />
 						<div className="grid grid-cols-[1fr_auto_16px] items-center gap-2">
 							<input
@@ -267,7 +267,7 @@ function NewTaskPage() {
 							</AnimatePresence>
 						</div>
 					</div>
-					<div>
+					<div className="relative">
 						<RichTextEditor
 							initialValue={getValues("htmlContent")}
 							setValue={setValue}
@@ -298,7 +298,7 @@ function NewTaskPage() {
 						</GhostButton>
 					</div>
 				</div>
-				<div className="relative">
+				<div className="relative xs:row-start-1 lg:col-start-2">
 					<div className="bg-neutral-200/70 border rounded py-3 flex flex-col sticky top-[5rem] dark:bg-dark-100 dark:border-light/20">
 						<ul className="*:grid *:grid-cols-[1fr_1.5fr] *:px-4">
 							{taskField.map((f, i) => (

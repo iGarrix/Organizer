@@ -136,14 +136,14 @@ function TaskDetailsPage(props: { params: { taskId: string } }) {
 		return <></>
 	}
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-			<div className="grid grid-cols-[1fr_22rem] gap-x-4">
-				<div className="flex flex-col relative">
-					<div className="flex gap-4 items-center">
+		<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col xs:px-2 lg:px-0">
+			<div className="grid grid-cols-[1fr_22rem] gap-x-4 xs:grid-cols-1 lg:grid-cols-[1fr_22rem]">
+				<div className="flex flex-col relative xs:mt-4 lg:mt-0">
+					<div className="flex gap-4 items-center xs:flex-col xs:gap-1 xs:items-start sm:items-center sm:gap-4 sm:flex-row">
 						<button
 							type="button"
 							className={cn(
-								"uppercase transition-all  font-semibold relative hover:underline group/id",
+								"uppercase transition-all whitespace-nowrap font-semibold relative hover:underline group/id",
 								getResolve() ? "text-gray-500 line-through" : "text-blue-500 hover:text-blue-600"
 							)}
 							onClick={() => {
@@ -166,7 +166,7 @@ function TaskDetailsPage(props: { params: { taskId: string } }) {
 					</div>
 					{isEdit ? (
 						<>
-							<div className="sticky top-[4rem] bg-light dark:bg-dark-200 pb-2 z-50">
+							<div className="sticky top-[4rem] xs:top-0 lg:top-[4rem] bg-light dark:bg-dark-200 pb-2 z-50">
 								<br />
 								<div className="grid grid-cols-[1fr_16px] items-center gap-2">
 									<input
@@ -272,7 +272,7 @@ function TaskDetailsPage(props: { params: { taskId: string } }) {
 						</>
 					) : (
 						<div className="pt-5">
-							<div className="flex items-center gap-4">
+							<div className="flex items-start gap-4">
 								<h1
 									className={cn(
 										"font-bold text-2xl transition-all hover:bg-accent-blue/30 cursor-pointer rounded",
@@ -297,9 +297,9 @@ function TaskDetailsPage(props: { params: { taskId: string } }) {
 										<DropdownMenuTrigger type="button">
 											<SlOptions className="w-4 h-4 text-neutral-500 transition-all hover:text-blue-500" />
 										</DropdownMenuTrigger>
-										<DropdownMenuContent className="bg-light rounded p-0 py-2 select-none min-w-[15rem]">
+										<DropdownMenuContent className="bg-light rounded p-0 py-2 select-none min-w-[15rem] dark:bg-dark-100 dark:border-light/20 z-10">
 											<DropdownMenuItem
-												className="text-rose-500 hover:!text-rose-600"
+												className="text-rose-500 hover:!text-rose-600 dark:hover:bg-light/5"
 												onClick={() => {
 													handleDeleteTask()
 												}}
@@ -332,7 +332,7 @@ function TaskDetailsPage(props: { params: { taskId: string } }) {
 						</div>
 					)}
 				</div>
-				<div className="relative">
+				<div className="relative xs:row-start-1 lg:col-start-2">
 					<div className="bg-neutral-200/70 border rounded py-3 flex flex-col sticky top-[5rem] dark:bg-dark-100 dark:border-light/20">
 						<ul className="flex flex-col *:items-start *:px-4 *:py-2">
 							{taskField.map((f, i) => (

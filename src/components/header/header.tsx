@@ -6,7 +6,6 @@ import { observer } from "mobx-react-lite"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 import { ComponentPropsWithoutRef, useEffect, useState } from "react"
-import { MdOutlineDarkMode } from "react-icons/md"
 
 import {
 	AlertDialog,

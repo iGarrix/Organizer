@@ -98,11 +98,7 @@ export const RenderFieldValue = ({
 						<div className="flex flex-col items-start">
 							<p className="text-neutral-500 text-[15px]">{props.fieldName}</p>
 							<div className="text-blue-500 text-start w-full dark:text-pink-400">
-								{vstring ? (
-									<p>{vstring}</p>
-								) : (
-									<p className=" text-neutral-400 dark:text-pink-400">?</p>
-								)}
+								{vstring ? <p>{vstring}</p> : <p className="!text-neutral-400">?</p>}
 							</div>
 						</div>
 					</DropdownMenuTrigger>
@@ -138,7 +134,7 @@ export const RenderFieldValue = ({
 							<DropdownMenuItem className="p-0 !bg-transparent">
 								<button
 									type="button"
-									className="text-neutral-600 transition-all hover:text-red-400 dark:text-neutral-400"
+									className="text-neutral-600 transition-all hover:text-red-400"
 								>
 									Cancel
 								</button>
@@ -176,7 +172,7 @@ export const RenderFieldValue = ({
 								</span>
 							</DropdownMenuItem>
 						))}
-						<DropdownMenuSeparator />
+						<DropdownMenuSeparator className="dark:bg-light/20" />
 						<DropdownMenuItem
 							className="text-sm text-blue-400 hover:!text-blue-500 transition-all hover:!bg-transparent dark:hover:!text-pink-400"
 							onClick={() => {
@@ -206,7 +202,7 @@ export const RenderFieldValue = ({
 						{vMultiList.options.map((f, i) => (
 							<li
 								key={i}
-								className="hover:!bg-blue-500/20 py-2 text-sm px-2 flex items-center justify-between"
+								className="hover:!bg-blue-500/20 py-2 text-sm px-2 flex items-center justify-between dark:text-light"
 								onClick={() => {
 									setTaskField(act => {
 										const ind = act.findIndex(act => act.fieldName === props.fieldName)
@@ -242,7 +238,7 @@ export const RenderFieldValue = ({
 						))}
 						<DropdownMenuSeparator className="dark:bg-light/20" />
 						<DropdownMenuItem
-							className="text-sm text-blue-400 hover:!text-blue-500 transition-all hover:!bg-transparent"
+							className="text-sm text-blue-400 hover:!text-blue-500 transition-all hover:!bg-transparent dark:hover:!text-pink-400"
 							onClick={() => {
 								push("/fields")
 							}}
@@ -262,14 +258,14 @@ export const RenderFieldValue = ({
 						<div className="flex flex-col items-start">
 							<p className="text-neutral-500 text-[15px]">{props.fieldName}</p>
 							<span className="text-blue-500 text-start dark:text-pink-400">
-								{vperiod ? vperiod.spent : "?"}
+								{vperiod ? vperiod.spent : <span className="!text-neutral-400">?</span>}
 							</span>
 						</div>
 					</DropdownMenuTrigger>
-					<DropdownMenuContent className="p-3 px-4 *:rounded-none *:cursor-pointer min-w-[22rem] flex flex-col gap-1">
+					<DropdownMenuContent className="p-3 px-4 *:rounded-none *:cursor-pointer min-w-[22rem] flex flex-col gap-1 dark:bg-dark-100 dark:border-light/20">
 						<input
 							className={cn(
-								"border !rounded text-sm outline-none py-1 px-1.5 active:border-blue-500 focus-within:border-blue-500"
+								"border !rounded text-sm outline-none py-1 px-1.5 active:border-blue-500 focus-within:border-blue-500 dark:border-light/20 dark:text-light dark:focus-within:border-blue-400"
 							)}
 							defaultValue={""}
 							onChange={e => {
@@ -292,14 +288,17 @@ export const RenderFieldValue = ({
 									iprops.onChange?.()
 								}}
 							>
-								<button type="submit" className="text-blue-400 transition-all hover:text-blue-600">
+								<button
+									type="submit"
+									className="text-blue-400 transition-all hover:text-blue-600 dark:hover:text-pink-400"
+								>
 									Apply
 								</button>
 							</DropdownMenuItem>
 							<DropdownMenuItem className="p-0 !bg-transparent">
 								<button
 									type="button"
-									className="text-neutral-600 transition-all hover:text-red-400"
+									className="text-neutral-600 transition-all hover:text-red-400 dark:hover:text-red-400"
 								>
 									Cancel
 								</button>
@@ -331,25 +330,31 @@ export const RenderFieldValue = ({
 							<span className="uppercase font-bold text-white">{selectedState.index[0]}</span>
 						</div>
 					</DropdownMenuTrigger>
-					<DropdownMenuContent className="px-0 *:rounded-none *:cursor-pointer min-w-[22rem]">
+					<DropdownMenuContent className="px-0 *:rounded-none *:cursor-pointer min-w-[22rem] dark:bg-dark-100 dark:border-light/20">
 						{vState.states.map((f, i) => (
 							<DropdownMenuItem
 								key={i}
-								className="hover:!bg-blue-500/20"
+								className="hover:!bg-blue-500/20 dark:text-light"
 								onClick={() => {
 									setTaskField(act => actor(act, i))
 									iprops.onChange?.()
 								}}
 							>
-								<span className={`${f.index === selectedState.index && "text-blue-500"} `}>
+								<span
+									className={`${
+										f.index === selectedState.index && "text-blue-500 dark:text-blue-400"
+									} `}
+								>
 									{f.index}
 								</span>
-								{f.isResolved && <FaRegCheckCircle className="text-green-500 ml-auto" />}
+								{f.isResolved && (
+									<FaRegCheckCircle className="text-green-500 ml-auto dark:text-green-400" />
+								)}
 							</DropdownMenuItem>
 						))}
-						<DropdownMenuSeparator />
+						<DropdownMenuSeparator className="dark:bg-light/20" />
 						<DropdownMenuItem
-							className="text-sm text-blue-400 hover:!text-blue-500 transition-all hover:!bg-transparent"
+							className="text-sm text-blue-400 hover:!text-blue-500 transition-all hover:!bg-transparent dark:hover:!text-pink-400"
 							onClick={() => {
 								push("/fields")
 							}}

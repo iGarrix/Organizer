@@ -88,11 +88,11 @@ function RichTextEditor({ setValue, initialValue, ...props }: IRichTextEditorPro
 			editor?.commands.setContent(initialValue)
 		}
 	}, [initialValue])
-
+	/// sticky top-[9.8rem] xs:top-[5.8rem] lg:top-[9.8rem]
 	return (
-		<div className="relative">
+		<div>
 			{editor && (
-				<div className="flex gap-3 items-center px-2 py-2 border-x border-t border-b rounded-t bg-light z-50 *:transition-all sticky top-[9.8rem] dark:bg-dark-100 dark:border-light/20">
+				<div className="flex gap-3 items-center px-2 py-2 border-x border-t border-b rounded-t bg-light z-50 *:transition-all sticky top-[9.8rem] xs:static lg:sticky lg:top-[9.8rem] dark:bg-dark-100 dark:border-light/20 flex-wrap">
 					<DropdownMenu>
 						<DropdownMenuTrigger className="flex items-center hover:text-accent-blue outline-none">
 							{editor.isActive("heading", { level: 3 })
@@ -139,7 +139,7 @@ function RichTextEditor({ setValue, initialValue, ...props }: IRichTextEditorPro
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
-					<div className="h-[0.8rem] w-[1px] bg-black/20"></div>
+					<div className="h-[0.8rem] w-[1px] bg-black/20 dark:bg-light/20"></div>
 					<button
 						className="hover:text-sky-600"
 						type="button"
@@ -177,7 +177,7 @@ function RichTextEditor({ setValue, initialValue, ...props }: IRichTextEditorPro
 							className={`w-4 h-4 ${editor.isActive("strike") ? "text-accent-blue" : ""}`}
 						/>
 					</button>
-					<div className="h-[0.8rem] w-[1px] bg-black/20"></div>
+					<div className="h-[0.8rem] w-[1px] bg-black/20 dark:bg-light/20"></div>
 					<DropdownMenu>
 						<DropdownMenuTrigger className="flex items-center hover:text-accent-blue outline-none">
 							<div className="w-5 h-5 rounded flex items-center justify-center">A</div>
@@ -290,7 +290,7 @@ function RichTextEditor({ setValue, initialValue, ...props }: IRichTextEditorPro
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
-					<div className="h-[0.8rem] w-[1px] bg-black/20"></div>
+					<div className="h-[0.8rem] w-[1px] bg-black/20 dark:bg-light/20"></div>
 					<button
 						className="hover:text-sky-600"
 						type="button"
@@ -318,7 +318,7 @@ function RichTextEditor({ setValue, initialValue, ...props }: IRichTextEditorPro
 							className={`w-4 h-4 ${editor.isActive("codeBlock") ? "text-accent-blue" : ""}`}
 						/>
 					</button>
-					<div className="h-[0.8rem] w-[1px] bg-black/20"></div>
+					<div className="h-[0.8rem] w-[1px] bg-black/20 dark:bg-light/20"></div>
 					<button
 						className="hover:text-sky-600"
 						type="button"

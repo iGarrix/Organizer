@@ -107,7 +107,10 @@ export const RenderFieldValue = ({ props, push, gStr, setGStr, setTaskField }: I
 									setGStr("")
 								}}
 							>
-								<button type="submit" className="text-blue-400 transition-all hover:text-blue-600">
+								<button
+									type="submit"
+									className="text-blue-400 transition-all hover:text-blue-600 dark:hover:text-pink-400"
+								>
 									Apply
 								</button>
 							</DropdownMenuItem>
@@ -225,7 +228,7 @@ export const RenderFieldValue = ({ props, push, gStr, setGStr, setTaskField }: I
 			return (
 				<DropdownMenu>
 					<DropdownMenuTrigger className="text-blue-500 dark:text-pink-400 outline-none py-2 text-start">
-						{vperiod ? vperiod.spent : "?"}
+						{vperiod ? vperiod.spent : <span className="!text-neutral-400">?</span>}
 					</DropdownMenuTrigger>
 					<DropdownMenuContent className="p-3 px-4 *:rounded-none *:cursor-pointer min-w-[13rem] flex flex-col gap-1 dark:bg-dark-100 dark:border-light/20">
 						<input
@@ -252,7 +255,10 @@ export const RenderFieldValue = ({ props, push, gStr, setGStr, setTaskField }: I
 									setGStr("")
 								}}
 							>
-								<button type="submit" className="text-blue-400 transition-all hover:text-blue-600">
+								<button
+									type="submit"
+									className="text-blue-400 transition-all hover:text-blue-600 dark:hover:text-pink-400"
+								>
 									Apply
 								</button>
 							</DropdownMenuItem>
@@ -309,7 +315,7 @@ export const RenderFieldValue = ({ props, push, gStr, setGStr, setTaskField }: I
 								)}
 							</DropdownMenuItem>
 						))}
-						<DropdownMenuSeparator />
+						<DropdownMenuSeparator className="dark:bg-light/20" />
 						<DropdownMenuItem
 							className="text-sm text-blue-400 hover:!text-blue-500 dark:hover:!text-pink-400 transition-all hover:!bg-transparent"
 							onClick={() => {

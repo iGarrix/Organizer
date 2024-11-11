@@ -29,12 +29,6 @@ function HeaderSettings({}: IHeaderSettingsProps) {
 				<DropdownMenuItem className="dark:hover:bg-blue-400/20 dark:hover:text-pink-400 cursor-pointer">
 					<GoWorkflow className="w-5 h-5" /> Workflow management
 				</DropdownMenuItem>
-				<DropdownMenuItem className="dark:hover:bg-blue-400/20 dark:hover:text-pink-400 cursor-pointer">
-					<CiBoxList className="w-5 h-5" /> Task fields
-				</DropdownMenuItem>
-				<DropdownMenuItem className="dark:hover:bg-blue-400/20 dark:hover:text-pink-400 cursor-pointer">
-					<CiShoppingTag className="w-5 h-5" /> Tags
-				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	)

@@ -16,7 +16,6 @@ const MobxStorageProtector = ({ children }: { children: ReactNode }) => {
 	const { load: articleLoad } = articleService
 	const pathname = usePathname()
 	const { push } = useRouter()
-
 	useEffect(() => {
 		if (!isGotted) {
 			loadFromLocalStorage()
@@ -39,16 +38,15 @@ const MobxStorageProtector = ({ children }: { children: ReactNode }) => {
 			push("/")
 		}
 	}, [workflow, isGotted])
-
-	if (state === LoaderState.Loading) {
+	if (state === LoaderState.Loading || !isGotted) {
 		return (
-			<div>
+			<>
 				<CustomSuspencer message={`Loading orginizer workflow`} />
-			</div>
+			</>
 		)
 	}
 
-	return children
+	return <>{children}</>
 }
 const protector = observer(MobxStorageProtector)
 export { protector as MobxStorageProtector }

@@ -43,25 +43,6 @@ function TaskCard({
 	if (!task) {
 		return <>unknows task</>
 	}
-	const getGap = () => {
-		const id = Number(task.id?.split("-")[1])
-		if (!id) {
-			return ""
-		}
-		if (id >= 1 && id < 10) {
-			return "grid-cols-[6.5rem_1fr]"
-		}
-		if (id >= 10 && id < 100) {
-			return "grid-cols-[7rem_1fr]"
-		}
-		if (id >= 100 && id < 1000) {
-			return "grid-cols-[8.5rem_1fr]"
-		}
-		if (id >= 1000 && id <= 10000) {
-			return "grid-cols-[9.5rem_1fr]"
-		}
-		return "grid-cols-[10rem_1fr]"
-	}
 
 	const renderCode = () => {
 		return (
@@ -192,15 +173,19 @@ function TaskCard({
 				<div
 					className={cn(
 						className,
-						"py-2 transition-all duration-75 rounded overflow-hidden grid grid-cols-[20px_1fr_30px] items-center gap-3 pl-2",
+						"py-2 transition-all duration-75 rounded overflow-hidden grid grid-cols-[20px_1fr_30px] items-center gap-3 pl-2 xs:items-start md:items-center",
 						isSelected ? "bg-blue-500/10" : "hover:bg-blue-500/20"
 					)}
 					{...props}
 				>
 					{renderIcon()}
-
 					<div className="flex line-clamp-1 gap-2">
-						<div className={cn("items-center gap-0 grid", getGap())} onClick={onRedirect}>
+						<div
+							className={cn(
+								"items-center gap-4 grid grid-cols-[auto_1fr] xs:grid-cols-[1fr_auto] xs:gap-1 md:grid-cols-[auto_1fr] md:gap-4 xs:w-full md:w-auto"
+							)}
+							onClick={onRedirect}
+						>
 							<span
 								className={cn(
 									"uppercase font-semibold",
@@ -212,16 +197,23 @@ function TaskCard({
 							</span>
 							<span
 								className={cn(
-									"cursor-pointer line-clamp-1 text-pretty",
+									"uppercase font-semibold text-neutral-400 text-end w-full xs:block md:hidden"
+								)}
+							>
+								{format(new Date(task.createdAt), "dd/MM")}
+							</span>
+							<span
+								className={cn(
+									"cursor-pointer line-clamp-1 text-pretty xs:line-clamp-3 xs:row-start-2 md:line-clamp-1 md:row-start-1 md:col-start-2",
 									resolvedValue.states[resolvedValue.selectedIndex].isResolved
 										? "text-gray-500"
-										: "text-blue-500 transition-all hover:text-pink-500 dark:text-blue-400"
+										: "text-blue-500 transition-all hover:text-pink-500 dark:text-blue-400 dark:hover:text-pink-400"
 								)}
 							>
 								{task.title}
 							</span>
 						</div>
-						<div className="flex items-center gap-1">
+						<div className="flex items-center gap-1 xs:hidden md:flex">
 							{task.tags
 								?.filter(f => f.index !== "Star")
 								.map((f, i) => (
@@ -249,13 +241,18 @@ function TaskCard({
 					<div
 						className={cn(
 							className,
-							"py-2 transition-all duration-75 rounded items-center overflow-hidden grid grid-cols-[20px_1fr_30px] gap-3 pl-2"
+							"py-2 transition-all duration-75 rounded items-center overflow-hidden grid grid-cols-[20px_1fr_30px] gap-3 pl-2 xs:items-start md:items-center"
 						)}
 						{...props}
 					>
 						{renderIcon()}
 						<div className="flex line-clamp-1 gap-2 min-h-6">
-							<div className={cn("items-center gap-0 grid", getGap())} onClick={onRedirect}>
+							<div
+								className={cn(
+									"items-center gap-4 grid grid-cols-[auto_1fr] xs:grid-cols-[1fr_auto] xs:gap-1 md:grid-cols-[auto_1fr] md:gap-4 xs:w-full md:w-auto"
+								)}
+								onClick={onRedirect}
+							>
 								<span
 									className={cn(
 										"uppercase font-semibold dark:text-neutral-200",
@@ -267,7 +264,14 @@ function TaskCard({
 								</span>
 								<span
 									className={cn(
-										" cursor-pointer line-clamp-1 text-pretty",
+										"uppercase font-semibold text-neutral-400 text-end w-full xs:block md:hidden"
+									)}
+								>
+									{format(new Date(task.createdAt), "dd/MM")}
+								</span>
+								<span
+									className={cn(
+										" cursor-pointer line-clamp-1 text-pretty xs:line-clamp-3 xs:row-start-2 md:line-clamp-1 md:row-start-1 md:col-start-2",
 										resolvedValue.states[resolvedValue.selectedIndex].isResolved
 											? "text-gray-500 dark:text-neutral-400"
 											: "text-blue-500 transition-all dark:text-blue-400 hover:text-pink-500 dark:hover:text-pink-400"
@@ -276,7 +280,7 @@ function TaskCard({
 									{task.title}
 								</span>
 							</div>
-							<div className="flex items-center gap-1">
+							<div className="flex items-center gap-1 xs:hidden md:flex">
 								{task.tags
 									?.filter(f => f.index !== "Star")
 									.map((f, i) => (
@@ -286,13 +290,20 @@ function TaskCard({
 						</div>
 						{renderCodeArrow()}
 					</div>
-					<div className="flex justify-start gap-3 divide-x pl-[32px] pb-2 line-clamp-1 dark:divide-light/20">
+					<div className="flex flex-wrap justify-start gap-2 divide-x pl-[32px] pb-2 line-clamp-1 overflow-hidden dark:divide-light/20 xs:flex md:hidden">
+						{task.tags
+							?.filter(f => f.index !== "Star")
+							.map((f, i) => (
+								<Tag key={i} value={f} disabled />
+							))}
+					</div>
+					<div className="flex justify-start gap-3 divide-x pl-[32px] pb-2 line-clamp-1 overflow-hidden dark:divide-light/20 xs:hidden md:flex">
 						{task.fields
 							.filter(f => f.value)
 							.map((f, i) => (
 								<div
 									key={i}
-									className="px-2 text-sm text-gray-500 dark:text-neutral-400 line-clamp-1 overflow-visible relative"
+									className="px-2 text-sm text-gray-500 dark:text-neutral-400 line-clamp-1 relative whitespace-nowrap"
 								>
 									{renderFieldValue(f)}
 								</div>
