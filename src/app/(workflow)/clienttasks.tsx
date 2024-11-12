@@ -24,7 +24,7 @@ import { IoIosSearch } from "react-icons/io"
 import { toast } from "sonner"
 
 function WorkflowClient(props: { searchParams: { [key: string]: string | null } }) {
-	const { workflow, isGotted, tasks, deleteTask } = useStorage()
+	const { workflow, isGotted, tasks, deleteTask, loadFromLocalStorage } = useStorage()
 	const [paginatedTasks, setPaginatedTasks] = useState<PaginatedResult<ITask> | null>()
 	const { notify } = notificationService
 	const { push } = useRouter()
@@ -120,6 +120,12 @@ function WorkflowClient(props: { searchParams: { [key: string]: string | null } 
 		}
 	}, [props.searchParams]) */
 
+	useEffect(() => {
+		if (!workflow) {
+			loadFromLocalStorage()
+		}
+	}, [workflow])
+
 	if (!workflow) {
 		return <Loader />
 	}
@@ -208,7 +214,13 @@ function WorkflowClient(props: { searchParams: { [key: string]: string | null } 
 					<div className="font-semibold uppercase flex gap-2">
 						<span>S</span>
 						<Slider
-							defaultValue={props.searchParams.size === "medium" ? [100] : [1]}
+							defaultValue={
+								props.searchParams.size
+									? props.searchParams.size === "medium"
+										? [100]
+										: [1]
+									: [100]
+							}
 							max={100}
 							min={1}
 							step={1}

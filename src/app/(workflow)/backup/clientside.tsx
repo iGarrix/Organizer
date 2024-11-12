@@ -78,7 +78,7 @@ function CBackupPage(props: { searchParams: { [key: string]: string | null } }) 
 	}
 
 	return (
-		<div className="flex flex-col">
+		<div className="flex flex-col pb-[10rem]">
 			<h1 className="text-xl font-bold text-center">Backup</h1>
 			<br />
 			<form
