@@ -1,0 +1,18 @@
+.cont {
+	@apply flex flex-col gap-1 px-4 py-3 bg-light dark:bg-dark-100 rounded-xl border text-sm;
+
+	label {
+		@apply text-zinc-500 text-sm select-none flex items-center gap-1;
+
+		svg {
+			@apply w-[16px];
+		}
+	}
+	input {
+		@apply bg-transparent outline-none dark:border-light/20;
+	}
+
+	&.error {
+		@apply border-rose-500;
+	}
+}
