@@ -36,7 +36,7 @@ function PhoneHeader({ ...props }: IPhoneHeaderProps) {
 	const { push } = useRouter()
 
 	return (
-		<header className="grid grid-cols-4 px-2 fixed bottom-0 left-0 w-full border-t bg-light dark:bg-dark-200 dark:border-t-light/20 xs:grid md:hidden pb-5">
+		<header className="grid grid-cols-4 px-2 fixed bottom-0 left-0 w-full border-t bg-light dark:bg-dark-200 dark:border-t-light/20 xs:grid md:hidden pb-8">
 			<Link
 				href={"/"}
 				className={cn(
@@ -90,7 +90,7 @@ function PhoneHeader({ ...props }: IPhoneHeaderProps) {
 						<DrawerDescription></DrawerDescription>
 					</DrawerHeader>
 					<div className="grid gap-2 px-[1rem]">
-						<button
+						{/* <button
 							className="dark:text-neutral-200 grid gap-2 items-center grid-cols-[30px_1fr] text-start"
 							onClick={() => {
 								setOpen(false)
@@ -98,7 +98,7 @@ function PhoneHeader({ ...props }: IPhoneHeaderProps) {
 						>
 							<GoWorkflow className="w-5 h-5" />
 							Workflow management
-						</button>
+						</button> */}
 						<button
 							className="dark:text-neutral-200 grid gap-2 items-center grid-cols-[30px_1fr] text-start"
 							onClick={() => {

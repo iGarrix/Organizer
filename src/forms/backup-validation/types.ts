@@ -1,5 +1,5 @@
 import { IArticle } from "@/api/articles/articles.types"
-import { INotification } from "@/api/notifications/notifications.types"
+import { INotificationStorageInstance } from "@/api/notifications/notifications.types"
 import { ITask, IWorkflow } from "@/api/storage/db.types"
 import { z } from "zod"
 
@@ -9,7 +9,7 @@ export type TBackup = {
 	task_drafts: ITask[]
 	articles: IArticle[]
 	article_drafts: IArticle[]
-	notifications: INotification[] | null
+	notifications: INotificationStorageInstance | null
 }
 
 export const BackupSchema = z.object({

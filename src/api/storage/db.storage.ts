@@ -3,6 +3,7 @@ import { LocalStorageContants } from "@/app/types"
 import { makeAutoObservable } from "mobx"
 import { ITag, ITask, IWorkflow, TWorkflowField } from "./db.types"
 import { TBackup } from "@/forms/backup-validation/types"
+import { setCookie, deleteCookie, getCookie } from "cookies-next/client"
 
 class Storage {
 	workflow: IWorkflow | null = null
@@ -30,6 +31,7 @@ class Storage {
 			this.workflow = workflow
 			const workflow_string = JSON.stringify(workflow)
 			localStorage.setItem(LocalStorageContants.Workflow, workflow_string)
+			setCookie(LocalStorageContants.Workflow, "origin")
 		}
 	}
 
@@ -37,6 +39,7 @@ class Storage {
 		if (typeof window !== "undefined") {
 			if (backup.workflow) {
 				localStorage.setItem(LocalStorageContants.Workflow, JSON.stringify(backup.workflow))
+				setCookie(LocalStorageContants.Workflow, "origin")
 				if (backup.tasks.length > 0) {
 					localStorage.setItem(LocalStorageContants.Tasks, JSON.stringify(backup.tasks))
 				}
@@ -63,10 +66,12 @@ class Storage {
 	}
 
 	loadFromLocalStorage = () => {
+		let init = false
 		if (typeof window !== "undefined") {
 			const _workflows = localStorage.getItem(LocalStorageContants.Workflow)
 			if (_workflows) {
 				this.workflow = JSON.parse(_workflows) as IWorkflow
+				init = true
 			}
 			// tasks
 			const _tasks = localStorage.getItem(LocalStorageContants.Tasks)
@@ -79,6 +84,7 @@ class Storage {
 			}
 			this.isGotted = true
 		}
+		return init
 	}
 
 	clearStorage = () => {
@@ -86,8 +92,8 @@ class Storage {
 			localStorage.removeItem(LocalStorageContants.Workflow)
 			localStorage.removeItem(LocalStorageContants.Tasks)
 			localStorage.removeItem(LocalStorageContants.TaskDrafts)
-			localStorage.removeItem(LocalStorageContants.Notifications)
 		}
+		deleteCookie(LocalStorageContants.Workflow)
 	}
 
 	createTask = (task: ITask) => {

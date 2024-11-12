@@ -38,7 +38,7 @@ function Header({ className, ...props }: IHeaderProps) {
 		if (!notifications || notifications.length === 0) {
 			load()
 		}
-	}, [load, notifications])
+	}, [notifications])
 	return (
 		<header
 			className={cn(
@@ -107,7 +107,7 @@ function Header({ className, ...props }: IHeaderProps) {
 					haveNoReaded={haveNoReaded}
 					clearAll={clearAll}
 				/>
-				<HeaderSettings />
+				{/* <HeaderSettings /> */}
 				{workflow && <HeaderAccount setSetupAnother={setSetupAnother} workflow={workflow} />}
 			</div>
 		</header>

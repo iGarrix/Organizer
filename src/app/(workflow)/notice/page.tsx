@@ -1,5 +1,5 @@
-import NewNoticePage from "./new/page"
+import { CNewNoticePage } from "./new/client"
 
 export default function NoticePage() {
-	return <NewNoticePage />
+	return <CNewNoticePage />
 }

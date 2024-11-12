@@ -8,7 +8,6 @@ import {
 } from "../ui/dropdown-menu"
 import { INotification, NotificationType } from "@/api/notifications/notifications.types"
 import { IoIosInformationCircle, IoIosWarning } from "react-icons/io"
-import { ScrollArea } from "../ui/scroll-area"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 import { MdOutlineNearbyError } from "react-icons/md"

@@ -18,6 +18,7 @@ import { IProgressType } from "../page"
 import FieldSetup from "./fieldsetup"
 import TagSetup from "./tagsetup"
 import { ScratchSetupIdentitySchema, ScratchSetupIdentityValues } from "./types"
+import { useRouter } from "next/navigation"
 
 export interface IScratchSetupWayProps {
 	progresPage: IProgressType
@@ -41,7 +42,7 @@ export default function ScratchSetupWay(props: IScratchSetupWayProps) {
 
 	const [tags, setTags] = useState<ITag[]>(seedTags)
 	const [fields, setFields] = useState<TWorkflowField[]>(seedFields)
-
+	const { push } = useRouter()
 	const { initializeStorageByForm } = useStorage()
 	const onSubmit = (values: ScratchSetupIdentityValues) => {
 		// Submit identity
@@ -69,6 +70,9 @@ export default function ScratchSetupWay(props: IScratchSetupWayProps) {
 				way: "scratch",
 				message: "Workflow set up successfully",
 			})
+			setTimeout(() => {
+				push("/")
+			}, 1000)
 		}
 	}
 

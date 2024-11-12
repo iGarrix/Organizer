@@ -182,13 +182,13 @@ function TaskCard({
 					<div className="flex line-clamp-1 gap-2">
 						<div
 							className={cn(
-								"items-center gap-4 grid grid-cols-[auto_1fr] xs:grid-cols-[1fr_auto] xs:gap-1 md:grid-cols-[auto_1fr] md:gap-4 xs:w-full md:w-auto"
+								"items-center gap-4 grid grid-cols-[auto_1fr] xs:grid-cols-[auto_1fr_auto] xs:gap-1 md:grid-cols-[auto_1fr] md:gap-4 xs:w-full md:w-auto"
 							)}
 							onClick={onRedirect}
 						>
 							<span
 								className={cn(
-									"uppercase font-semibold",
+									"uppercase font-semibold mr-2",
 									resolvedValue.states[resolvedValue.selectedIndex].isResolved &&
 										"text-gray-500 line-through"
 								)}
@@ -197,20 +197,20 @@ function TaskCard({
 							</span>
 							<span
 								className={cn(
-									"uppercase font-semibold text-neutral-400 text-end w-full xs:block md:hidden"
-								)}
-							>
-								{format(new Date(task.createdAt), "dd/MM")}
-							</span>
-							<span
-								className={cn(
-									"cursor-pointer line-clamp-1 text-pretty xs:line-clamp-3 xs:row-start-2 md:line-clamp-1 md:row-start-1 md:col-start-2",
+									"cursor-pointer line-clamp-1 text-pretty xs:line-clamp-3 md:line-clamp-1 md:col-start-2",
 									resolvedValue.states[resolvedValue.selectedIndex].isResolved
 										? "text-gray-500"
 										: "text-blue-500 transition-all hover:text-pink-500 dark:text-blue-400 dark:hover:text-pink-400"
 								)}
 							>
 								{task.title}
+							</span>
+							<span
+								className={cn(
+									"uppercase font-semibold text-neutral-400 text-end w-full xs:block md:hidden"
+								)}
+							>
+								{format(new Date(task.createdAt), "dd/MM")}
 							</span>
 						</div>
 						<div className="flex items-center gap-1 xs:hidden md:flex">

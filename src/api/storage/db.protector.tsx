@@ -4,49 +4,38 @@
 import { LoaderState } from "@/app/types"
 import CustomSuspencer from "@/components/suspencers/custom_suspencer"
 import { observer } from "mobx-react-lite"
-import { usePathname, useRouter } from "next/navigation"
 import { ReactNode, useEffect, useState } from "react"
 import { useStorage } from "./db.provider"
 import { articleService } from "../articles/articles.instance"
+import { notificationService } from "../notifications/notification.instance"
 
 const MobxStorageProtector = ({ children }: { children: ReactNode }) => {
-	// Should be loading as default
 	const [state, setState] = useState(LoaderState.Loading)
-	const { workflow, isGotted, loadFromLocalStorage } = useStorage()
+	const { loadFromLocalStorage } = useStorage()
 	const { load: articleLoad } = articleService
-	const pathname = usePathname()
-	const { push } = useRouter()
-	useEffect(() => {
-		if (!isGotted) {
-			loadFromLocalStorage()
-			articleLoad()
-		}
-	}, [isGotted])
+	const { load: notificationLoad } = notificationService
 
 	useEffect(() => {
-		if (!workflow && isGotted && state !== LoaderState.Initialized) {
-			push("/setup")
-			setTimeout(() => {
-				setState(LoaderState.Setup)
-			}, 100)
-			return
+		if (state === LoaderState.Loading) {
+			const success = loadFromLocalStorage()
+			articleLoad()
+			notificationLoad()
+			if (success) {
+				setState(LoaderState.Initialized)
+				return
+			}
+			setState(LoaderState.InitExecuted)
 		}
-		setTimeout(() => {
-			setState(LoaderState.Initialized)
-		}, 100)
-		if (pathname === "/setup") {
-			push("/")
-		}
-	}, [workflow, isGotted])
-	if (state === LoaderState.Loading || !isGotted) {
+	}, [])
+
+	if (state === LoaderState.Loading) {
 		return (
 			<>
 				<CustomSuspencer message={`Loading orginizer workflow`} />
 			</>
 		)
 	}
-
-	return <>{children}</>
+	return children
 }
 const protector = observer(MobxStorageProtector)
 export { protector as MobxStorageProtector }
