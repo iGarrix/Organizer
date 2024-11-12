@@ -36,7 +36,7 @@ function PhoneHeader({ ...props }: IPhoneHeaderProps) {
 	const { push } = useRouter()
 
 	return (
-		<header className="grid grid-cols-4 px-2 fixed bottom-0 left-0 w-full border-t bg-light dark:bg-dark-200 dark:border-t-light/20 xs:grid md:hidden pb-2">
+		<header className="grid grid-cols-4 px-2 fixed bottom-0 left-0 w-full border-t bg-light dark:bg-dark-200 dark:border-t-light/20 xs:grid md:hidden pb-5">
 			<Link
 				href={"/"}
 				className={cn(

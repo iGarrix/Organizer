@@ -9,26 +9,22 @@ import { Link } from "@/components/common/link/link"
 import Loader from "@/components/common/loaders/loader/loader.component"
 import { CustomPagination } from "@/components/common/paginator/paginator.component"
 
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Slider } from "@/components/ui/slider"
 import { FilterSchema, FilterValues } from "@/forms/filter-form/types"
 import { generatePaginationByParams, TASK_LIMIT } from "@/services/paginator/paginator.helpers"
-import { paginate } from "@/services/paginator/paginator.service"
 import { PaginatedResult } from "@/services/paginator/paginator.types"
 import { addSearchParam } from "@/services/url/url.service"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ChevronDown } from "lucide-react"
 import { toJS } from "mobx"
 import { observer } from "mobx-react-lite"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import { ImSpinner4 } from "react-icons/im"
 import { IoIosSearch } from "react-icons/io"
 import { toast } from "sonner"
 
 function Home(props: { searchParams: { [key: string]: string | null } }) {
-	const { workflow, tasks, deleteTask } = useStorage()
+	const { workflow, isGotted, tasks, deleteTask } = useStorage()
 	const [paginatedTasks, setPaginatedTasks] = useState<PaginatedResult<ITask> | null>()
 	const { notify } = notificationService
 	const { push } = useRouter()
@@ -118,10 +114,7 @@ function Home(props: { searchParams: { [key: string]: string | null } }) {
 			setPaginatedTasks(generatePaginationByParams([], props.searchParams))
 		}
 	}, [props.searchParams])
-	if (!workflow) {
-		return <Loader />
-	}
-	if (!tasks || tasks.length === 0 || !paginatedTasks) {
+	if (!tasks || tasks.length === 0 || !paginatedTasks || !workflow) {
 		return (
 			<div className="flex flex-col items-center justify-center">
 				<h1 className="uppercase font-semibold text-2xl">Tasks empty</h1>

@@ -24,7 +24,7 @@ export default function SetupPage() {
 		way: "none",
 		message: "Select way of set up",
 	})
-	const { push } = useRouter()
+	const { push, refresh } = useRouter()
 	const { initializeStorageByImport } = useStorage()
 	function importSettings(e: any) {
 		const file = e.target.files[0]
@@ -40,6 +40,7 @@ export default function SetupPage() {
 						message: "Configurations imported successfully",
 					})
 					setTimeout(() => {
+						refresh()
 						push("/")
 					}, 1000)
 				} catch (err) {
