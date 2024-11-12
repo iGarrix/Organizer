@@ -60,11 +60,10 @@ function Header({ className, ...props }: IHeaderProps) {
 							Cancel
 						</AlertDialogCancel>
 						<AlertDialogAction
-							className="!bg-neutral-100 hover:!bg-emerald-500 hover:!text-light dark:text-light dark:!bg-neutral-700 dark:hover:!bg-green-500/70"
+							className="!bg-neutral-100 text-black hover:!bg-emerald-500 hover:!text-light dark:text-light dark:!bg-neutral-700 dark:hover:!bg-green-500/70"
 							onClick={() => {
-								clearStorage()
 								setSetupAnother(false)
-								push("/setup")
+								push("/backup?transfer=new")
 							}}
 						>
 							Continue
@@ -99,10 +98,9 @@ function Header({ className, ...props }: IHeaderProps) {
 				</HeaderItem>
 			</nav>
 			<div className="ml-auto flex items-center gap-4">
-				{/* <button className="transition-all hover:-translate-y-[2px]">
-					<MdOutlineDarkMode className="w-6 h-6 text-neutral-700" />
-				</button> */}
-				<ThemeSwitch />
+				<div className="transition-all hover:-translate-y-1">
+					<ThemeSwitch />
+				</div>
 				<HeaderNotifications
 					notifications={notifications}
 					readableall={readableall}

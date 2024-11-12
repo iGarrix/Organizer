@@ -7,6 +7,10 @@ import { AnimatePresence, motion } from "framer-motion"
 import { useState } from "react"
 import { MdFilterNone, MdOutlineImportExport } from "react-icons/md"
 import ScratchSetupWay from "./scratchway/scratchway"
+import { toast } from "sonner"
+import { TBackup } from "@/forms/backup-validation/types"
+import { useStorage } from "@/api/storage/db.provider"
+import { useRouter } from "next/navigation"
 
 export type IProgressType = {
 	progress: number
@@ -20,13 +24,32 @@ export default function SetupPage() {
 		way: "none",
 		message: "Select way of set up",
 	})
-
-	function importSettings() {
-		setProgresPage({
-			progress: 100,
-			way: "import",
-			message: "Configurations imported successfully",
-		})
+	const { push } = useRouter()
+	const { initializeStorageByImport } = useStorage()
+	function importSettings(e: any) {
+		const file = e.target.files[0]
+		if (file && file.type === "application/json") {
+			const reader = new FileReader()
+			reader.onload = () => {
+				try {
+					const parsedData = JSON.parse(reader.result as string) as TBackup
+					initializeStorageByImport(parsedData)
+					setProgresPage({
+						progress: 100,
+						way: "import",
+						message: "Configurations imported successfully",
+					})
+					setTimeout(() => {
+						push("/")
+					}, 1000)
+				} catch (err) {
+					toast.error("Uploaded file invalid")
+				}
+			}
+			reader.readAsText(file)
+		} else {
+			toast.error("Uploaded file invalid")
+		}
 	}
 	function startFromScratch() {
 		setProgresPage({
@@ -37,8 +60,8 @@ export default function SetupPage() {
 	}
 
 	return (
-		<div className="w-svw h-svh overflow-x-hidden grid grid-rows-[25svh_1fr] gap-5 pb-[3rem] relative bg-light">
-			<div className="flex items-center justify-center gap-5 sticky top-0 left-0 bg-light z-10 px-[2rem]">
+		<div className="w-svw h-svh overflow-x-hidden grid grid-rows-[25svh_1fr] gap-5 pb-[3rem] relative bg-light dark:bg-dark-200">
+			<div className="flex items-center justify-center gap-5 sticky top-0 left-0 bg-light z-10 px-[2rem] dark:bg-dark-200">
 				<h2 className="font-bold text-3xl text-transparent bg-gradient-to-br from-accent-blue to-accent-green bg-clip-text text-center min-w-[20rem]">
 					{progresPage.message}
 					<div className="text-sm mt-2">
@@ -51,7 +74,7 @@ export default function SetupPage() {
 					</div>
 				</h2>
 			</div>
-			<div className="flex flex-col items-center justify-start bg-light">
+			<div className="flex flex-col items-center justify-start bg-light dark:bg-dark-200">
 				<AnimatePresence>
 					{progresPage.progress === 0 && (
 						<motion.div
@@ -69,13 +92,14 @@ export default function SetupPage() {
 							}}
 							className="grid gap-3 min-w-[20rem]"
 						>
-							<DefButton
-								className="py-5 grid grid-cols-[1fr_2fr] items-center justify-start"
-								onClick={importSettings}
+							<input type="file" className="hidden" onChange={importSettings} id="config" />
+							<label
+								htmlFor="config"
+								className="bg-neutral-200 text-center text-neutral-800 px-4 rounded cursor-pointer transition-all hover:bg-neutral-300 text-sm select-none py-5 grid grid-cols-[1fr_2fr] w-full items-center justify-start dark:bg-dark-100 dark:text-light dark:hover:bg-light/10"
 							>
 								<MdOutlineImportExport className="w-7 h-7" />
 								<p className="text-start">Import from file</p>
-							</DefButton>
+							</label>
 							<div className="flex items-center gap-2 xs:hidden md:flex">
 								<hr className="grow" />
 								<span>OR</span>
@@ -83,7 +107,7 @@ export default function SetupPage() {
 							</div>
 							<DefButton
 								type="button"
-								className="py-5 grid grid-cols-[1fr_2fr] items-center justify-start xs:hidden md:grid"
+								className="py-5 grid grid-cols-[1fr_2fr] items-center justify-start xs:hidden md:grid dark:bg-dark-100 dark:text-light dark:hover:bg-light/10"
 								onClick={startFromScratch}
 							>
 								<MdFilterNone className="w-5 h-5" />

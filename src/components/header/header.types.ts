@@ -12,7 +12,7 @@ export const navHeader: TNav[] = [
 		type: "include",
 	}, */
 	{
-		title: "Notice",
+		title: "Notes",
 		pathname: "/notice",
 		type: "include",
 	},

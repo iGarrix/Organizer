@@ -126,7 +126,7 @@ export default function ScratchSetupWay(props: IScratchSetupWayProps) {
 											onChange={field.onChange}
 											value={field.value}
 										>
-											<InputOTPGroup className="uppercase">
+											<InputOTPGroup className="uppercase ">
 												<InputOTPSlot index={0} />
 												<InputOTPSlot index={1} />
 												<InputOTPSlot index={2} />
@@ -143,7 +143,10 @@ export default function ScratchSetupWay(props: IScratchSetupWayProps) {
 							/>
 							<DefButton
 								type="submit"
-								className={cn("mt-2 w-full", isSubmitSuccessful && "bg-green-500")}
+								className={cn(
+									"mt-2 w-full dark:bg-dark-100 dark:hover:bg-light/10 dark:text-light",
+									isSubmitSuccessful && "bg-green-500"
+								)}
 							>
 								Next
 							</DefButton>

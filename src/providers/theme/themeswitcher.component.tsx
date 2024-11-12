@@ -35,7 +35,7 @@ export default function ThemeSwitch() {
 	} else {
 		return (
 			<MdOutlineDarkMode
-				className="w-6 h-6 text-neutral-700 dark:text-neutral-500 cursor-pointer"
+				className="w-6 h-6 text-neutral-700 dark:text-neutral-500 cursor-pointer transition-all hover:-translate-y-2"
 				onClick={() => setTheme("dark")}
 			/>
 		)

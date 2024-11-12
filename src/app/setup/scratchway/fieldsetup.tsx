@@ -1,25 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-'use client'
+"use client"
 
-import {
-	IFieldEnum,
-	IFieldMultiEnum,
-	IFieldState,
-	TWorkflowField,
-} from '@/api/storage/db.types'
-import DefButton from '@/components/common/buttons/defbutton/defbutton.component'
-import { SortableDragItem } from '@/components/common/drag/dragitem/dragitem.component'
-import { cn } from '@/lib/utils'
-import { DndContext, closestCenter } from '@dnd-kit/core'
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { format } from 'date-fns'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Dispatch, SetStateAction, useState } from 'react'
-import { FaArrowRight } from 'react-icons/fa'
-import { GoEye, GoEyeClosed } from 'react-icons/go'
-import { toast } from 'sonner'
-import { IScratchSetupWayProps } from './scratchway'
+import { IFieldEnum, IFieldMultiEnum, IFieldState, TWorkflowField } from "@/api/storage/db.types"
+import DefButton from "@/components/common/buttons/defbutton/defbutton.component"
+import { SortableDragItem } from "@/components/common/drag/dragitem/dragitem.component"
+import { cn } from "@/lib/utils"
+import { DndContext, closestCenter } from "@dnd-kit/core"
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
+import { format } from "date-fns"
+import { AnimatePresence, motion } from "framer-motion"
+import { Dispatch, SetStateAction, useState } from "react"
+import { FaArrowRight } from "react-icons/fa"
+import { GoEye, GoEyeClosed } from "react-icons/go"
+import { toast } from "sonner"
+import { IScratchSetupWayProps } from "./scratchway"
 
 export interface ITagSetupProps {
 	nestedProps: IScratchSetupWayProps
@@ -51,18 +46,18 @@ export default function FieldSetup({
 		const { fieldType, value } = props
 		const isSpy = props.fieldName === spyField
 		switch (fieldType) {
-			case 'date':
+			case "date":
 				if (!value) {
-					return <p className='text-neutral-400'>While creating</p>
+					return <p className="text-neutral-400">While creating</p>
 				}
-				return <p>{format(value as Date, 'dd.M.yyyy hh:mm')}</p>
-			case 'string':
+				return <p>{format(value as Date, "dd.M.yyyy hh:mm")}</p>
+			case "string":
 				return <p>{value as string}</p>
-			case 'list':
+			case "list":
 				const vList = value as IFieldEnum
 				if (isSpy) {
 					return (
-						<ul className='overflow-hidden'>
+						<ul className="overflow-hidden">
 							{vList.options.map((f, i) => (
 								<li key={i}>{f}</li>
 							))}
@@ -70,7 +65,7 @@ export default function FieldSetup({
 					)
 				}
 				return <p>{vList.options[vList.selectedIndex] || vList.options[0]}</p>
-			case 'multi-list':
+			case "multi-list":
 				const vMultiList = value as IFieldMultiEnum
 				if (isSpy) {
 					return (
@@ -88,22 +83,17 @@ export default function FieldSetup({
 						))}
 					</ul>
 				)
-			case 'period':
+			case "period":
 				return <>datetime</>
-			case 'state':
+			case "state":
 				const vState = value as IFieldState
-				const selectedState =
-					vState.states[vState.selectedIndex] || vState.states[0]
+				const selectedState = vState.states[vState.selectedIndex] || vState.states[0]
 				return (
-					<div className='flex items-center gap-2'>
+					<div className="flex items-center gap-2">
 						<span>{selectedState.index}</span>
 						<FaArrowRight />
-						<span
-							className={cn(
-								selectedState.isResolved ? 'text-green-500' : 'text-neutral-400'
-							)}
-						>
-							{selectedState.isResolved ? 'Done' : 'Unresolved'}
+						<span className={cn(selectedState.isResolved ? "text-green-500" : "text-neutral-400")}>
+							{selectedState.isResolved ? "Done" : "Unresolved"}
 						</span>
 					</div>
 				)
@@ -116,7 +106,7 @@ export default function FieldSetup({
 		<AnimatePresence>
 			{props.progresPage.progress === 50 && (
 				<motion.div
-					initial={{ y: '10svh', opacity: 0, scale: 0.8 }}
+					initial={{ y: "10svh", opacity: 0, scale: 0.8 }}
 					animate={{
 						y: 0,
 						opacity: 1,
@@ -124,12 +114,12 @@ export default function FieldSetup({
 						transition: { delay: 0.2 },
 					}}
 					exit={{
-						y: '-5svh',
+						y: "-5svh",
 						opacity: 0,
 						scale: 0.8,
 						transition: { duration: 0.2 },
 					}}
-					className='flex flex-col gap-2'
+					className="flex flex-col gap-2"
 				>
 					<DndContext
 						collisionDetection={closestCenter}
@@ -159,19 +149,17 @@ export default function FieldSetup({
 											}}
 											additionalFunks={
 												item.value &&
-												Object.keys(item.value as IFieldEnum).includes(
-													'options'
-												) &&
+												Object.keys(item.value as IFieldEnum).includes("options") &&
 												(spyField && spyField === item.fieldName ? (
 													<GoEyeClosed
-														className='w-5 h-5 z-10 cursor-pointer hover:text-blue-400'
+														className="w-5 h-5 z-10 cursor-pointer hover:text-blue-400 dark:hover:text-pink-400"
 														onClick={() => {
 															setSpyField(null)
 														}}
 													/>
 												) : (
 													<GoEye
-														className='w-5 h-5 z-10 cursor-pointer hover:text-blue-400'
+														className="w-5 h-5 z-10 cursor-pointer hover:text-blue-400 dark:hover:text-pink-400"
 														onClick={() => {
 															setSpyField(item.fieldName)
 														}}
@@ -179,10 +167,10 @@ export default function FieldSetup({
 												))
 											}
 										>
-											<div className='flex flex-col'>
-												<h3 className='text-lg font-semibold flex items-start gap-2'>
-													{item.fieldName}{' '}
-													<span className='text-sm font-normal text-[12px] bg-neutral-100 text-neutral-400 rounded-xl px-1'>
+											<div className="flex flex-col">
+												<h3 className="text-lg font-semibold flex items-start gap-2">
+													{item.fieldName}{" "}
+													<span className="text-sm font-normal text-[12px] bg-neutral-100 text-neutral-400 dark:bg-light/10 rounded-xl px-1">
 														{item.fieldType}
 													</span>
 												</h3>
@@ -194,7 +182,12 @@ export default function FieldSetup({
 							</AnimatePresence>
 						</SortableContext>
 					</DndContext>
-					<DefButton type='submit'>Continue</DefButton>
+					<DefButton
+						type="submit"
+						className="dark:bg-dark-100 dark:hover:bg-light/10 dark:text-light"
+					>
+						Continue
+					</DefButton>
 				</motion.div>
 			)}
 		</AnimatePresence>

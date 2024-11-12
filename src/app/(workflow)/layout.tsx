@@ -10,7 +10,10 @@ export const metadata: Metadata = {
 
 export default function WorkflowLayout(props: Readonly<{ children: React.ReactNode }>) {
 	return (
-		<main className="min-h-svh w-full text-sm flex flex-col bg-light dark:bg-dark-200">
+		<main
+			className="min-h-svh w-full text-sm flex flex-col bg-light dark:bg-dark-200"
+			aria-hidden={false}
+		>
 			<Header />
 			<br />
 			<div className="grow grid px-[15rem] xs:px-0 sm:px-5 2xl:px-[10rem] min-[1620px]:px-[15rem]">

@@ -2,6 +2,7 @@ import { ScratchSetupIdentityValues } from "@/app/setup/scratchway/types"
 import { LocalStorageContants } from "@/app/types"
 import { makeAutoObservable } from "mobx"
 import { ITag, ITask, IWorkflow, TWorkflowField } from "./db.types"
+import { TBackup } from "@/forms/backup-validation/types"
 
 class Storage {
 	workflow: IWorkflow | null = null
@@ -32,9 +33,32 @@ class Storage {
 		}
 	}
 
-	initializeStorageByImport = () => {
+	initializeStorageByImport = (backup: TBackup) => {
 		if (typeof window !== "undefined") {
-			//localStorage.setItem('counter', JSON.stringify(this.count))
+			if (backup.workflow) {
+				localStorage.setItem(LocalStorageContants.Workflow, JSON.stringify(backup.workflow))
+				if (backup.tasks.length > 0) {
+					localStorage.setItem(LocalStorageContants.Tasks, JSON.stringify(backup.tasks))
+				}
+				if (backup.task_drafts.length > 0) {
+					localStorage.setItem(LocalStorageContants.TaskDrafts, JSON.stringify(backup.task_drafts))
+				}
+				if (backup.articles.length > 0) {
+					localStorage.setItem(LocalStorageContants.Articles, JSON.stringify(backup.articles))
+				}
+				if (backup.article_drafts.length > 0) {
+					localStorage.setItem(
+						LocalStorageContants.ArticleDraft,
+						JSON.stringify(backup.article_drafts)
+					)
+				}
+				if (backup.notifications) {
+					localStorage.setItem(
+						LocalStorageContants.Notifications,
+						JSON.stringify(backup.notifications)
+					)
+				}
+			}
 		}
 	}
 
@@ -61,6 +85,7 @@ class Storage {
 		if (typeof window !== "undefined") {
 			localStorage.removeItem(LocalStorageContants.Workflow)
 			localStorage.removeItem(LocalStorageContants.Tasks)
+			localStorage.removeItem(LocalStorageContants.TaskDrafts)
 			localStorage.removeItem(LocalStorageContants.Notifications)
 		}
 	}

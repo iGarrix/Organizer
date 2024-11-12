@@ -112,9 +112,13 @@ function Home(props: { searchParams: { [key: string]: string | null } }) {
 			}
 			return
 		}
-		setPaginatedTasks(generatePaginationByParams(jsTasks, props.searchParams))
+		if (jsTasks.length > 0) {
+			setPaginatedTasks(generatePaginationByParams(jsTasks, props.searchParams))
+		} else {
+			setPaginatedTasks(generatePaginationByParams([], props.searchParams))
+		}
 	}, [props.searchParams])
-	if (!workflow || !paginatedTasks) {
+	if (!workflow) {
 		return <Loader />
 	}
 	if (!tasks || tasks.length === 0 || !paginatedTasks) {

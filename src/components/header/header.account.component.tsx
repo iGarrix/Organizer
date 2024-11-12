@@ -9,6 +9,8 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
+import { useRouter } from "next/navigation"
+import { LuDatabaseBackup } from "react-icons/lu"
 
 export interface IHeaderAccountProps {
 	workflow: IWorkflow
@@ -16,6 +18,7 @@ export interface IHeaderAccountProps {
 }
 
 function HeaderAccount(props: IHeaderAccountProps) {
+	const { push } = useRouter()
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger className="outline-none select-none">
@@ -39,6 +42,14 @@ function HeaderAccount(props: IHeaderAccountProps) {
 						</p>
 					</div>
 				</DropdownMenuLabel>
+				<DropdownMenuItem
+					className="hover:!bg-blue-500 hover:!text-white dark:text-light/80"
+					onClick={() => {
+						push("/backup")
+					}}
+				>
+					<LuDatabaseBackup className="w-5 h-5" /> Backup
+				</DropdownMenuItem>
 				<DropdownMenuItem
 					className="hover:!bg-rose-500 hover:!text-white dark:text-light/80"
 					onClick={() => {
