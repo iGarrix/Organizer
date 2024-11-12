@@ -143,7 +143,7 @@ export default function ArticlePage(props: { params: { article: string } }) {
 					</div>
 					{isEdit ? (
 						<>
-							<div className="sticky top-[4rem] bg-light dark:bg-dark-200 pb-2 z-50">
+							<div className="sticky top-[4rem] xs:top-0 lg:top-[4rem] bg-light dark:bg-dark-200 pb-2 z-50">
 								<br />
 								<div className="grid grid-cols-[1fr_16px] items-center gap-2">
 									<input

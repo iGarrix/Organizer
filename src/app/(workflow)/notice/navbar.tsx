@@ -9,7 +9,7 @@ import { FaPlus } from "react-icons/fa"
 function NavbarNotice() {
 	const { articles } = articleService
 	return (
-		<div className="w-full sticky top-[5rem]">
+		<div className="w-full sticky top-[5rem] xs:static lg:sticky">
 			<div className="w-full bg-gray-200/60 border rounded overflow-hidden dark:bg-dark-100 dark:border-light/20">
 				<div className="flex items-center justify-between py-2">
 					<h1 className="text-lg font-semibold uppercase px-4">Notices</h1>

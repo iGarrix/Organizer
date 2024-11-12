@@ -114,11 +114,12 @@ function NewNoticePage() {
 	}, [])
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+		<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col xs:px-2 lg:px-0">
 			<div className="grid gap-x-4">
 				<div className="flex flex-col relative">
-					<div className="sticky top-[5rem] pb-2 z-50">
-						<div className="grid grid-cols-[1fr_auto_16px] bg-light items-center gap-2 dark:bg-dark-200">
+					<div className="sticky top-[5rem] xs:top-0 lg:top-[5rem] pb-2 z-50 bg-light dark:bg-dark-200">
+						<br className="xs:block lg:hidden" />
+						<div className="grid grid-cols-[1fr_auto_16px] items-center gap-2">
 							<input
 								type="text"
 								{...register("title")}
@@ -247,7 +248,7 @@ function NewNoticePage() {
 						/>
 					</div>
 					<br />
-					<div className="flex gap-2 pb-[10rem]">
+					<div className="flex gap-2 pb-[10rem] xs:flex-col sm:flex-row">
 						<DefButton type="submit" className="bg-sky-500 text-white hover:bg-sky-6000">
 							Create article
 						</DefButton>

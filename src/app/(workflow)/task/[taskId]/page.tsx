@@ -166,7 +166,7 @@ function TaskDetailsPage(props: { params: { taskId: string } }) {
 					</div>
 					{isEdit ? (
 						<>
-							<div className="sticky top-[4rem] xs:top-0 lg:top-[4rem] bg-light dark:bg-dark-200 pb-2 z-50">
+							<div className="sticky top-[4rem] xs:top-0 md:top-[4rem] bg-light dark:bg-dark-200 pb-2 z-50">
 								<br />
 								<div className="grid grid-cols-[1fr_16px] items-center gap-2">
 									<input
@@ -256,7 +256,7 @@ function TaskDetailsPage(props: { params: { taskId: string } }) {
 								/>
 							</div>
 							<br />
-							<div className="flex gap-2 pb-[10rem]">
+							<div className="flex gap-2 pb-[10rem] xs:flex-col sm:flex-row">
 								<DefButton type="submit" className="bg-sky-500 text-white hover:bg-sky-600">
 									Save
 								</DefButton>
