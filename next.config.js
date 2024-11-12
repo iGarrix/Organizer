@@ -2,7 +2,8 @@
 /** @type {import('next').NextConfig} */
 const path = require("path")
 
-const nextConfig = {
+const withPWA = require('next-pwa')
+  const nextConfig = {
 	reactStrictMode: false,
 	swcMinify: true,
 	optimizeFonts: true,
@@ -22,4 +23,9 @@ const nextConfig = {
 	},
 }
 
-module.exports = nextConfig
+module.exports = withPWA({
+      dest: 'public',
+      register: true,
+      skipWaiting: true,
+      disable: process.env.NODE_ENV === 'development',
+    })(nextConfig)

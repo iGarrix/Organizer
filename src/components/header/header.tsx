@@ -72,7 +72,7 @@ function Header({ className, ...props }: IHeaderProps) {
 				</AlertDialogContent>
 			</AlertDialog>
 			<div className="flex items-center gap-2">
-				<Image src={src} alt="icon" />
+				<Image src={src} alt="icon" className="w-[48px] h-[48px]" />
 				<h1 className="font-borel font-black text-2xl tracking-wider dark:text-neutral-300">
 					Organizer
 				</h1>
