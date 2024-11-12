@@ -24,7 +24,7 @@ const MobxStorageProtector = ({ children }: { children: ReactNode }) => {
 	}, [isGotted])
 
 	useEffect(() => {
-		if (!workflow && isGotted) {
+		if (!workflow && isGotted && state !== LoaderState.Initialized) {
 			push("/setup")
 			setTimeout(() => {
 				setState(LoaderState.Setup)

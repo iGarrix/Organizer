@@ -93,7 +93,6 @@ function NewTaskPage() {
 			type: NotificationType.Info,
 		})
 		toast.info("Task created successfully")
-
 		push(`/task/${workflow?.id}-${tasks.length + 1}`)
 	}
 
