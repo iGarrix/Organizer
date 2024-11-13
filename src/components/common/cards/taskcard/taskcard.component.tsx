@@ -163,7 +163,7 @@ function TaskCard({
 			)
 		)
 	}
-
+	console.log(task.tags?.map(f => f.index).includes("Star"))
 	if (cardSize === "minimal") {
 		return (
 			<div className="flex flex-col relative">
@@ -236,7 +236,7 @@ function TaskCard({
 					)}
 				>
 					{task.tags?.map(f => f.index).includes("Star") && (
-						<FaStar className="absolute top-[10px] left-[-20px] w-4 h-4 text-amber-500" />
+						<FaStar className="absolute top-[10px] left-[-20px] w-4 h-4 text-amber-500 z-10" />
 					)}
 					<div
 						className={cn(

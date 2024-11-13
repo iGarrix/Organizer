@@ -140,7 +140,7 @@ function WorkflowClient(props: { searchParams: { [key: string]: string | null } 
 		)
 	}
 	return (
-		<div className="h-full min-h-screen flex flex-col gap-4 pb-6 overflow-x-hidden">
+		<div className="h-full min-h-screen flex flex-col gap-4 pb-6">
 			<div className="flex flex-col gap-2 xs:px-2 md:px-0">
 				<div className="w-full">
 					<form
@@ -243,7 +243,7 @@ function WorkflowClient(props: { searchParams: { [key: string]: string | null } 
 					</div>
 				</form>
 			</div>
-			<div className="">
+			<div>
 				{paginatedTasks.list
 					.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 					.map((f, i) => (
