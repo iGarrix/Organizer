@@ -163,7 +163,6 @@ function TaskCard({
 			)
 		)
 	}
-	console.log(task.tags?.map(f => f.index).includes("Star"))
 	if (cardSize === "minimal") {
 		return (
 			<div className="flex flex-col relative">

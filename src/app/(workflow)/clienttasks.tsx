@@ -52,10 +52,18 @@ function WorkflowClient(props: { searchParams: { [key: string]: string | null } 
 
 	const onSubmit = (values: FilterValues) => {
 		const jsTasks = toJS(tasks)
-		const paginateModel = generatePaginationByParams(
-			jsTasks.filter(f => f.title.toLowerCase().includes(values.findValue.toLowerCase())),
-			props.searchParams
-		)
+		if (values.findValue) {
+			const paginateModel = generatePaginationByParams(
+				jsTasks.filter(f => f.title.toLowerCase().includes(values.findValue.toLowerCase())),
+				props.searchParams
+			)
+			if (paginateModel) {
+				setPaginatedTasks(paginateModel)
+			}
+			push(addSearchParam(props.searchParams, { search: values.findValue }))
+			return
+		}
+		const paginateModel = generatePaginationByParams(jsTasks, props.searchParams)
 		if (paginateModel) {
 			setPaginatedTasks(paginateModel)
 		}
